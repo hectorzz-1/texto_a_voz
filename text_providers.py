@@ -8,14 +8,14 @@ from interfaz import GUIFileSelector
 
 
 # Clase padre.
-class TextProvider(ABC):
+class Provider(ABC):
     # Metodo para ingresar texto.
     @abstractmethod
     def get_text(self):
         pass
 
 # Clase hija que obtiene el texto desde la cosola.
-class ConsoleTextProvider(TextProvider):
+class ConsoleTextProvider(Provider):
     
     def get_text(self):
         print("Introduzca su texto")
@@ -26,15 +26,20 @@ class ConsoleTextProvider(TextProvider):
 # Clase hija que obtiene el file 
 # (para que se maneje mas adelante)
 # devuelve el path de un file
-class FileTextProvider(TextProvider):
+class FileProvider(Provider):
     
     def __init__ (self, selector: GUIFileSelector):
         self.selector = selector
 
     def get_text(self):
         return self.selector.select_file()
-    
 
-selctor = GUIFileSelector()
-selct = FileTextProvider(selctor)
-selct.get_text()
+
+# Convierte un file de texto plano a una cadena de texto
+# retorna --> una cadena de texto (str)
+class GetFileText:
+
+    def get_text_of_file(self,path: str):
+        with open(path, "r", encoding="utf-8") as f:
+            contenido = f.read()
+            return contenido

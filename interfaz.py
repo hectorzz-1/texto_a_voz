@@ -12,18 +12,5 @@ class GUIFileSelector:
         root.withdraw() # Oculta la ventana principal
 
         # Abre el selector de archivos y devuelve la ruta de un path
-        return filedialog.askopenfilename(title="Selecciona un archivo")
-    
-
-class FileTextProvider:
-    
-    def __init__(self, selector: GUIFileSelector):
-        self.selector = selector
-
-    def get_text(self):
-        return self.selector.select_file()
-    
-
-selector = GUIFileSelector()      
-selct = FileTextProvider(selector) 
-texto = selct.get_text()
+        path = filedialog.askopenfilename(title="Selecciona un archivo")
+        return path
