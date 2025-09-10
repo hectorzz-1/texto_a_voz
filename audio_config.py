@@ -56,3 +56,42 @@ class ModeConfig(AudioConfig):
                 return self.cm[indice]
         
         return False
+    
+
+# Esta clase definirá la voz que se usará en el audio Online
+# retornara un texto que se usara como clave para la voz
+# si no introduce una voz valida retornará None
+class VoiceConfig(AudioConfig):
+
+    def __init__(self):
+        self.voices_set = {"shimmer","alloy","echo","fable","onyx","nova"}
+        self.voices_list = ["shimmer","alloy","echo","fable","onyx","nova"]
+
+    def config(self):
+        # Mostra las pociones de voces
+        for voz in self.voices_list:
+            print(voz)
+        
+        voice = input("Seleccione una voz")
+
+        # Validar que la voz exista
+        if voice in self.voices_set:
+            return voice
+        
+        return None
+
+
+# Esta clase definirá el nombre del audio
+# retornará un texto que se usará como nombre
+# si tiene mas de 250 caracteres retornará None
+class NameConfig:
+
+    def nameLarge(self, name):
+        if len(name) > 251:
+            name = None
+
+    def config(self):
+        name = input("Nombre del file: ")
+        self.nameLarge(name)
+
+        return name
