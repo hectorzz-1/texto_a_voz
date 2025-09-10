@@ -6,7 +6,7 @@ import json
 from datetime import datetime
 
 
-# renovará el los usos por dia
+# renovará los usos por dia
 class DayLimit():
 
     def __init__(self): 
@@ -65,14 +65,7 @@ class UseLimit:
         if uses < 4:
             with open(self.json, "w") as f:
                 json.dump(file, f)
-                print(file)
+
             return True
         
-        print("error")
         return False
-
-
-h = DayLimit()
-h.limitador()
-a = UseLimit()
-a.usage_limiter()

@@ -15,16 +15,16 @@ class AudioConfig(ABC):
 
 # Esta clase definirá en que idioma quiere el audio
 # retornará una de estas opciones si puso el input correctamente:
-# "es" Español, "en" ingles, "it" italiano o "po" Portugues
+# "es" Español, "en" ingles, "fr" frances o "po" Portugues
 # si no retornará False
 class LanguageConfig(AudioConfig):
 
     def __init__ (self):
         self.list_language = [
-            "español", "ingles", "italiano", "portugues"
+            "español", "ingles", "frances", "portugues"
             ]
         self.cl = [
-            "es", "en", "it", "po"
+            "es", "en", "fr", "pt"
         ]
 
     def config(self):
