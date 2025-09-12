@@ -5,6 +5,7 @@ import decoration
 import audio_config
 import text_providers
 import interfaz
+import text_validators
 
 # Clases Externas
 import time
@@ -35,6 +36,13 @@ file_interfaz = interfaz.GUIFileSelector()
 text_provider = text_providers.ConsoleTextProvider()
 file_provider = text_providers.FileProvider(file_interfaz)
 get_file_text = text_providers.GetFileText()
+
+# Intancias del script text_validators.py
+if_empty = text_validators.TextValidatorIfEmpty()
+if_characters = text_validators.TextValidatorValid()
+if_onlyespace = text_validators.TextValidatorEspace()
+if_Long = text_validators.TextValidatorLong()
+validator = text_validators.Validator(if_empty, if_characters ,if_onlyespace ,if_Long)
 
 
 for i in range(3):
@@ -129,7 +137,35 @@ for i in range(3):
 
     # Si quiere escribir
     if get_text == 1:
-        print(1)
+        for i in range(3):
+            # Inicialisar la lista de errores
+            fails = []
+
+            # Pedirá el texto al usuario
+            text = text_provider.get_text()
+
+            # Validar que el texto sea valido para convertir a audio
+            validate = validator.validate(text)
+
+            # Calcula cuantos errores hubo si es que hubo
+            for i in validate:
+                if i["check"] == True:
+                    pass
+                else:
+                    fails.append(i["error"])
+
+            # Si no hay errores saldrá del for 
+            # y significará que el texto es valido
+            if not fails:
+                break
+            # Si hay algun error lo imprimirá por pantalla
+            # y le volverá a pedir un texto 
+            else:
+                for i in fails:
+                    print("Error:",i)
+                
+                continue
+                        
         break
 
     # Si quiere pasar un file

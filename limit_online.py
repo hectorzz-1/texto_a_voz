@@ -16,7 +16,7 @@ class DayLimit():
 
 
     def initializer(self):
-        # obtiene el dia
+        # Obtiene el dia
         # escribe el fichero .json y pone 2 pares clave-valor
         # {day : "dia actual", uses : 0 (usos por defaul)} 
         with open(self.json, "w") as f:
@@ -25,8 +25,9 @@ class DayLimit():
         
 
     def limitador(self):
-        # abre el fichero .json
-
+        # Abre el fichero .json
+        # esto lo que hace es si el archivo esta vacio le pone los valores
+        # necesarios para que no dé error
         try:
             with open(self.json, "r") as f:
                file = json.load(f)
@@ -35,12 +36,10 @@ class DayLimit():
             with open(self.json, "r") as f:
                file = json.load(f)
 
-        # esto lo que hace es si el archivo esta vacio le pone los valores
-        # necesarios para que no dé error
+        # Si es un nuevo dia renueva los usos
         if self.hoy != file["day"]:
             self.initializer()
         
-        return
 
 
 # Esta clase determina cuantas veces ah usado el modo online
@@ -51,14 +50,12 @@ class UseLimit:
     def __init__(self):
         self.json = "online.json"
 
-    def usage_limiter(self):
+    def count_usage_limiter(self):
         # abre el fichero .json
         with open(self.json, "r") as f:
             file = json.load(f)
-        
-        # suma un numero a los usos
-        uses = file["uses"] + 1
-        file["uses"] = uses
+
+        uses = file["uses"]
 
         # si ha usado esto menos de 4 veces el modo online
         # retornará True de lo contrario retornará False
@@ -69,3 +66,12 @@ class UseLimit:
             return True
         
         return False
+    
+    def sum_usage_limiter(self):
+        # abre el fichero .json
+        with open(self.json, "r") as f:
+            file = json.load(f)
+        
+        # suma un numero a los usos
+        uses = file["uses"] + 1
+        file["uses"] = uses
