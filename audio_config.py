@@ -68,14 +68,11 @@ class VoiceConfig(AudioConfig):
         self.voices_list = ["shimmer","alloy","echo","fable","onyx","nova"]
 
     def config(self):
-        # Mostra las pociones de voces
-        for voz in self.voices_list:
-            print(voz)
-        
+           
         voice = input("Seleccione una voz")
 
         # Validar que la voz exista
-        if voice in self.voices_set:
+        if voice.lower() in self.voices_set:
             return voice
         
         return None

@@ -31,7 +31,6 @@ class AudioGeneretor(ABC):
 # --> file_mp3 = nombre del audio final que genera (audio.mp3 defaul)
 # --> language = idioma del audio (en(ingles) defaul)
 # --> speed = velocidad de reproduccion (150 defaul)
-# output --> audio.mp3
 class AudioGeneretorOffline(AudioGeneretor):
     
     def generate_audio(self ,text:str ,file_wav="audio.wav",file_mp3="audio.mp3",language="en"):
@@ -60,9 +59,14 @@ class AudioGeneretorOffline(AudioGeneretor):
         sonido.export(file_mp3, format="mp3")
 
 
+# Genera un audio mp3 desde un texto
+# Input
+# --> text (str) = texto que se genera a audio
+# --> voice (alloy defaul) = voz del audio
+# --> file_mp3 (audio.mp3 defaul) = nombre del audio
 class AudioGeneretorOnline(AudioGeneretor):
     
-    def generate_audio(self, text, voice="alloy", file_mp3="audio.mp3"):
+    def generate_audio(self, text:str, voice="alloy", file_mp3="audio.mp3"):
         
         # Generar audio con OpenAI TTS
         respuesta = openai.audio.speech.create(
@@ -74,7 +78,3 @@ class AudioGeneretorOnline(AudioGeneretor):
         # Guardar el audio directamente
         with open(file_mp3, "wb") as f:
             f.write(respuesta.audio)
-
-
-dd = AudioGeneretorOnline()
-dd.generate_audio("hi, how are you?, i see you happy, i love it")
